@@ -3,6 +3,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * This class provides a model for a checkers game.
+ * An integer matrix is used to represent the game board.
+ * In this representation, positive values are associated with the red player,
+ * while negative values are associated with the black player. Values of magnitude 1
+ * are normal pieces, while values of magnitude 2 are king pieces. For example,
+ * -1 represents a normal black piece, whereas 2 represents a red king piece.
+ * 0 represents a blank space.
+ */
 public class CheckersModel {
 
     /*
