@@ -34,7 +34,12 @@ public class CheckersModel {
     private Map<String, Set<String>> possibleMoves;
 
     public CheckersModel() {
+        initializeGame();
+    }
+
+    private void initializeGame() {
         board = new int[BOARD_ROWS][BOARD_COLS];
+        possibleMoves = new HashMap<>();
         //Initialize the first three rows with red pieces.
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < BOARD_COLS; j++) {
@@ -51,11 +56,14 @@ public class CheckersModel {
                 }
             }
         }
-        possibleMoves = new HashMap<>();
         winner = 0;
         //Red moves first
         currentPlayer = RED_PIECE;
         setPossibleMoves();
+    }
+
+    public void resetGame() {
+        initializeGame();
     }
 
     //Convenience method.

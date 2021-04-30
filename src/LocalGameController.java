@@ -1,7 +1,12 @@
+import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -17,9 +22,9 @@ public class LocalGameController {
     private Map<String, Set<String>> possibleMoves;
 
     public LocalGameController() {
+        //One-time setup of boardComponent
         boardComponent = new BoardComponent();
         checkersModel = new CheckersModel();
-        selectedSquare = null;
         for(int i = 0; i < CheckersModel.BOARD_ROWS; i++) {
             for(int j = 0; j < CheckersModel.BOARD_COLS; j++) {
                 CheckersSquareComponent square = boardComponent.getSquare(i,j);
@@ -33,10 +38,19 @@ public class LocalGameController {
                 });
             }
         }
+        //sets up a new game.
+        initializeController();
+    }
+
+    //Sets up a new game.
+    public void initializeController() {
+        checkersModel.resetGame();
+        selectedSquare = null;
         updateView();
         possibleMoves = checkersModel.getPossibleMoves();
         highlightAvailable(true);
     }
+
 
     //This method will update the boardComponent according to the
     //current state of the checkersModel.
@@ -86,11 +100,37 @@ public class LocalGameController {
         checkersModel.makeMove(from,to);
         updateView();
         if(checkersModel.getWinner() != 0) {
-            System.out.println("GAME OVER");
+            endGame();
         }
         //get the possible moves, and highlight movable pieces.
         possibleMoves = checkersModel.getPossibleMoves();
         highlightAvailable(true);
+    }
+
+    private void endGame() {
+        String winnerString;
+        if(checkersModel.getWinner() == CheckersModel.RED_PIECE) {winnerString = "Red";}
+        else if(checkersModel.getWinner() == CheckersModel.BLACK_PIECE) {winnerString = "Black";}
+        else {throw new IllegalStateException();}
+        Alert gameOverAlert =
+                new Alert(
+                        Alert.AlertType.NONE,
+                        winnerString+" wins! Play Again?",
+                        ButtonType.YES,ButtonType.NO
+                );
+        gameOverAlert.setTitle("Game Over");
+        gameOverAlert.setGraphic(null);
+        //Prevent the alert from being closed by the "X" button.
+        Optional<ButtonType> result = gameOverAlert.showAndWait();
+        if(!result.isPresent()) {
+            gameOverAlert.close();
+        }
+        else if(result.get() == ButtonType.YES) {
+            initializeController();
+        }
+        else if(result.get() == ButtonType.NO) {
+            Platform.exit();
+        }
     }
 
     //sets the highlight on all movable pieces.
