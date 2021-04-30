@@ -58,6 +58,13 @@ public class CheckersModel {
         setPossibleMoves();
     }
 
+    //Convenience method.
+    public boolean makeMove(String from, String to) {
+        int[] fromCoords = convertStringCoordinates(from);
+        int[] toCoords = convertStringCoordinates(to);
+        return makeMove(fromCoords[0],fromCoords[1],toCoords[0],toCoords[1]);
+    }
+
     //Makes the entered move if possible, otherwise returns false
     //Moves are entered as strings, from "ij" to "xy"
     public boolean makeMove(int i, int j, int x, int y) {
@@ -218,6 +225,11 @@ public class CheckersModel {
 
     public int getPieceAt(int i, int j) {
         return board[i][j];
+    }
+
+    public static int[] convertStringCoordinates(String coordinates) {
+        return new int[] {Character.getNumericValue(coordinates.charAt(0)),
+                Character.getNumericValue(coordinates.charAt(1))};
     }
 
     @Override

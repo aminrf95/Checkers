@@ -14,7 +14,9 @@ public class CheckersApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        BoardComponent boardComponent = new BoardComponent();
+        LocalGameController gameController = new LocalGameController();
+
+        BoardComponent boardComponent = gameController.getBoardComponent();
         StackPane pane = new StackPane(boardComponent);
         pane.setAlignment(Pos.CENTER);
         pane.setPadding(new Insets(40,40,40,40));

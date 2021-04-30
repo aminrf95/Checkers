@@ -12,21 +12,29 @@ import javafx.scene.shape.Rectangle;
  */
 public class CheckersSquareComponent extends StackPane {
 
-    Rectangle square;
-    Circle crown;
-    Circle piece;
+    private Rectangle marker;
+    private Rectangle square;
+    private Circle crown;
+    private Circle piece;
 
     public CheckersSquareComponent(Color squareColor) {
         setAlignment(Pos.CENTER);
         square = new Rectangle(100,100,squareColor);
+        marker = new Rectangle(98,98);
+        marker.setFill(Color.TRANSPARENT);
+        marker.setStrokeWidth(2);
+        marker.setStroke(Color.WHITE);
+        marker.setVisible(false);
         piece = new Circle(30);
         piece.setStroke(Color.GOLD);
         piece.setStrokeWidth(2);
+        piece.setMouseTransparent(true);
         crown = new Circle(25);
         crown.setFill(Color.TRANSPARENT);
         crown.setStroke(Color.GOLD);
         crown.setStrokeWidth(1.5);
-        getChildren().addAll(square,piece,crown);
+        crown.setMouseTransparent(true);
+        getChildren().addAll(square,marker,piece,crown);
         setBlank();
     }
 
@@ -68,6 +76,11 @@ public class CheckersSquareComponent extends StackPane {
             piece.setStroke(Color.GOLD);
             crown.setStroke(Color.GOLD);
         }
+    }
+
+    //Used to mark spaces that the selected piece can move to.
+    public void setMarker(boolean marked) {
+        marker.setVisible(marked);
     }
 
 }
