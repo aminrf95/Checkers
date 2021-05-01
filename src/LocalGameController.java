@@ -16,13 +16,15 @@ import java.util.Set;
  */
 public class LocalGameController {
 
+    MainController mainController;
     private BoardComponent boardComponent;
     private CheckersModel checkersModel;
     private String selectedSquare;
     private Map<String, Set<String>> possibleMoves;
 
-    public LocalGameController() {
+    public LocalGameController(MainController mainController) {
         //One-time setup of boardComponent
+        this.mainController = mainController;
         boardComponent = new BoardComponent();
         checkersModel = new CheckersModel();
         for(int i = 0; i < CheckersModel.BOARD_ROWS; i++) {
@@ -73,8 +75,8 @@ public class LocalGameController {
         //Clear any previously marked squares.
         markPossible(false);
         String squareCoordinates = ""+i+j;
+        //We need to check if the piece at i,j can be moved.
         if(possibleMoves.containsKey(squareCoordinates)) {
-            //We need to verify that the piece at i,j can be moved.
             selectedSquare = squareCoordinates;
             //mark all possible moves from i,j
             markPossible(true);
@@ -85,11 +87,8 @@ public class LocalGameController {
             if(possibleMoves.get(selectedSquare).contains(squareCoordinates)) {
                 //This is a valid move.
                 commitMove(selectedSquare,squareCoordinates);
-                selectedSquare = null;
             }
-            else {
-                selectedSquare = null;
-            }
+            selectedSquare = null;
         }
     }
 
@@ -120,16 +119,16 @@ public class LocalGameController {
                 );
         gameOverAlert.setTitle("Game Over");
         gameOverAlert.setGraphic(null);
-        //Prevent the alert from being closed by the "X" button.
+        //May need to handle case where user presses "x" button
         Optional<ButtonType> result = gameOverAlert.showAndWait();
         if(!result.isPresent()) {
-            gameOverAlert.close();
+            mainController.setMainMenuScene();
         }
         else if(result.get() == ButtonType.YES) {
             initializeController();
         }
         else if(result.get() == ButtonType.NO) {
-            Platform.exit();
+            mainController.setMainMenuScene();
         }
     }
 
@@ -143,6 +142,10 @@ public class LocalGameController {
 
     //Marks or unmarks all possible moves from the current selected square.
     private void markPossible(boolean mark) {
+        if(selectedSquare!=null){
+            int[] selectedSquareCoords = CheckersModel.convertStringCoordinates(selectedSquare);
+            boardComponent.getSquare(selectedSquareCoords[0],selectedSquareCoords[1]).setMarker(mark); //0000000000
+        }
         if(possibleMoves.containsKey(selectedSquare)) {
             for(String s : possibleMoves.get(selectedSquare)) {
                 int[] coordinates = CheckersModel.convertStringCoordinates(s);

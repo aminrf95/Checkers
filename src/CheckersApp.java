@@ -14,15 +14,16 @@ public class CheckersApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        LocalGameController gameController = new LocalGameController();
+//        LocalGameController gameController = new LocalGameController();
+//
+//        BoardComponent boardComponent = gameController.getBoardComponent();
+//        StackPane pane = new StackPane(boardComponent);
+//        pane.setAlignment(Pos.CENTER);
+//        pane.setPadding(new Insets(40,40,40,40));
+//        Scene gameScene = new Scene(pane);
 
-        BoardComponent boardComponent = gameController.getBoardComponent();
-        StackPane pane = new StackPane(boardComponent);
-        pane.setAlignment(Pos.CENTER);
-        pane.setPadding(new Insets(40,40,40,40));
-        Scene gameScene = new Scene(pane);
+        MainController mainController = new MainController(primaryStage);
 
-        primaryStage.setScene(gameScene);
         primaryStage.setTitle("Checkers");
         primaryStage.show();
     }
