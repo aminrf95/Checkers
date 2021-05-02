@@ -34,7 +34,21 @@ public class MainMenu extends Region {
         playButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                mainController.setGameScene();
+                mainController.startLocalGame();
+            }
+        });
+        Button hostButton = new Button("Host Game");
+        hostButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                mainController.setOnlineGameScene(true);
+            }
+        });
+        Button joinButton = new Button("Join Game");
+        joinButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                mainController.setOnlineGameScene(false);
             }
         });
         Button exitButton = new Button("Exit");
@@ -44,6 +58,6 @@ public class MainMenu extends Region {
                 Platform.exit();
             }
         });
-        menuItems.getChildren().addAll(playButton,exitButton);
+        menuItems.getChildren().addAll(playButton,hostButton,joinButton,exitButton);
     }
 }
