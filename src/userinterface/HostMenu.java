@@ -1,10 +1,10 @@
+package userinterface;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class HostMenu extends Region {
 
@@ -35,7 +34,7 @@ public class HostMenu extends Region {
         }
     }
 
-    private MainController mainController;
+    private SceneSwitcher sceneSwitcher;
     private ServerSocket serverSocket;
     private Socket socket;
     private ServerThread serverThread;
@@ -45,8 +44,8 @@ public class HostMenu extends Region {
     private Button connectButton;
     private Button searchButton;
 
-    public HostMenu(MainController mainController) {
-        this.mainController = mainController;
+    public HostMenu(SceneSwitcher sceneSwitcher) {
+        this.sceneSwitcher = sceneSwitcher;
         BorderPane mainPane = new BorderPane();
         this.getChildren().add(mainPane);
         VBox menuItems = new VBox();
@@ -88,7 +87,7 @@ public class HostMenu extends Region {
                 hostName.setText("");
                 portNumber.setText("");
                 shutDownConnection();
-                mainController.setMainMenuScene();
+                sceneSwitcher.setMainMenuScene();
             }
         });
     }
@@ -117,7 +116,7 @@ public class HostMenu extends Region {
         try {
             socket.getOutputStream().write(0);
             serverSocket.close();
-            mainController.startHostGame(socket);
+            sceneSwitcher.startHostGame(socket);
         } catch (IOException e) {
             hostMenuText.setText("Client disconnected. Hit cancel and try again.");
         }

@@ -1,5 +1,15 @@
+package game.gametype;
+
+import game.view.BoardComponent;
+import game.logic.CheckersModel;
+import game.view.CheckersSquareComponent;
+import game.logic.GameController;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
+
+import java.util.Optional;
 
 public class LocalGame extends Game {
 
@@ -22,5 +32,10 @@ public class LocalGame extends Game {
                 });
             }
         }
+    }
+
+    @Override
+    public void quitGame() {
+
     }
 }

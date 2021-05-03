@@ -1,3 +1,5 @@
+package userinterface;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -5,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -13,13 +14,13 @@ import javafx.scene.text.Text;
 
 public class MainMenu extends Region {
 
-    private MainController mainController;
+    private SceneSwitcher sceneSwitcher;
     private Text title;
     private BorderPane mainPane;
     private VBox menuItems;
 
-    public MainMenu(MainController mainController) {
-        this.mainController = mainController;
+    public MainMenu(SceneSwitcher sceneSwitcher) {
+        this.sceneSwitcher = sceneSwitcher;
         mainPane = new BorderPane();
         mainPane.setPadding(new Insets(40,40,40,40));
         getChildren().add(mainPane);
@@ -34,21 +35,21 @@ public class MainMenu extends Region {
         playButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                mainController.startLocalGame();
+                sceneSwitcher.startLocalGame();
             }
         });
         Button hostButton = new Button("Host Game");
         hostButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                mainController.setHostMenuScene();
+                sceneSwitcher.setHostMenuScene();
             }
         });
         Button joinButton = new Button("Join Game");
         joinButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                mainController.setJoinMenuScene();
+                sceneSwitcher.setJoinMenuScene();
             }
         });
         Button exitButton = new Button("Exit");

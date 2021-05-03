@@ -1,9 +1,6 @@
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import userinterface.SceneSwitcher;
 
 public class CheckersApp extends Application {
 
@@ -13,7 +10,7 @@ public class CheckersApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        MainController mainController = new MainController(primaryStage);
+        SceneSwitcher sceneSwitcher = new SceneSwitcher(primaryStage);
         primaryStage.setTitle("Checkers");
         primaryStage.show();
     }

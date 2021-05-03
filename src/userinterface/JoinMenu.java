@@ -1,3 +1,5 @@
+package userinterface;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,12 +19,12 @@ import java.net.Socket;
 
 public class JoinMenu extends Region {
 
-    private MainController mainController;
+    private SceneSwitcher sceneSwitcher;
     private BorderPane mainPane;
     private VBox menuItems;
 
-    public JoinMenu(MainController mainController) {
-        this.mainController = mainController;
+    public JoinMenu(SceneSwitcher sceneSwitcher) {
+        this.sceneSwitcher = sceneSwitcher;
         mainPane = new BorderPane();
         this.getChildren().add(mainPane);
         menuItems = new VBox();
@@ -67,7 +69,7 @@ public class JoinMenu extends Region {
                     portNumber = Integer.parseInt(portNumberField.getText());
                     Socket socket = new Socket(hostName,portNumber);
                     socket.getInputStream().read();
-                    mainController.startClientGame(socket);
+                    sceneSwitcher.startClientGame(socket);
                 } catch (IOException e) {
                     hostNameLabel.setTextFill(Color.RED);
                     portNumberLabel.setTextFill(Color.RED);
@@ -90,7 +92,7 @@ public class JoinMenu extends Region {
                 hostNameField.clear();
                 portNumberField.clear();
                 joinMenuText.setText(instructions);
-                mainController.setMainMenuScene();
+                sceneSwitcher.setMainMenuScene();
             }
         });
     }

@@ -1,3 +1,5 @@
+import game.logic.CheckersModel;
+
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;

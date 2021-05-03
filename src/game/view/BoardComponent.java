@@ -1,5 +1,5 @@
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+package game.view;
+
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

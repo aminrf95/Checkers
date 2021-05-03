@@ -1,3 +1,9 @@
+package game.gametype;
+
+import game.view.BoardComponent;
+import game.logic.CheckersModel;
+import game.view.CheckersSquareComponent;
+import game.logic.GameController;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -75,7 +81,6 @@ public class OnlineGame extends Game {
         connectionThread.start();
     }
 
-
     public void shutDownConnection() {
         System.out.println("Shutting down connection...");
         connectionThread.interrupt();
@@ -93,5 +98,9 @@ public class OnlineGame extends Game {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void quitGame() {
+        shutDownConnection();
     }
 }

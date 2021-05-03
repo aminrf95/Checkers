@@ -1,12 +1,9 @@
-import javafx.application.Platform;
-import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogEvent;
-import javafx.scene.input.MouseEvent;
+package game.logic;
+
+import game.view.BoardComponent;
+import game.view.CheckersSquareComponent;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 /**
