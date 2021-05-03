@@ -18,10 +18,14 @@ public class MainController {
 
     private Stage primaryStage;
     private Scene mainMenuScene;
+    private Scene hostMenuScene;
+    private Scene joinMenuScene;
 
     public MainController(Stage primaryStage) {
         this.primaryStage = primaryStage;
         mainMenuScene = new Scene(new MainMenu(this));
+        hostMenuScene = new Scene(new HostMenu(this));
+        joinMenuScene = new Scene(new JoinMenu(this));
         setMainMenuScene();
     }
 
@@ -71,9 +75,45 @@ public class MainController {
         primaryStage.setScene(mainMenuScene);
     }
 
+    public void setJoinMenuScene() {
+        primaryStage.setScene(joinMenuScene);
+    }
+
+    public void setHostMenuScene() {
+        primaryStage.setScene(hostMenuScene);
+    }
+
     public void startLocalGame() {
         GameController gameController = new GameController();
         LocalGame localGame = new LocalGame(gameController);
+        setGameScene(gameController.getBoardComponent());
+    }
+
+    public void startClientGame(Socket socket) throws IOException {
+        System.out.println("Client");
+        int player = -1;
+        GameController gameController = new GameController();
+        OnlineGame onlineGame = new OnlineGame(gameController, socket, player);
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                onlineGame.shutDownConnection();
+            }
+        });
+        setGameScene(gameController.getBoardComponent());
+    }
+
+    public void startHostGame(Socket socket) throws IOException {
+        System.out.println("Host");
+        int player = 1;
+        GameController gameController = new GameController();
+        OnlineGame onlineGame = new OnlineGame(gameController, socket, player);
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                onlineGame.shutDownConnection();
+            }
+        });
         setGameScene(gameController.getBoardComponent());
     }
 }

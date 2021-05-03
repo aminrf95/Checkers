@@ -41,14 +41,14 @@ public class MainMenu extends Region {
         hostButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                mainController.setOnlineGameScene(true);
+                mainController.setHostMenuScene();
             }
         });
         Button joinButton = new Button("Join Game");
         joinButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                mainController.setOnlineGameScene(false);
+                mainController.setJoinMenuScene();
             }
         });
         Button exitButton = new Button("Exit");
