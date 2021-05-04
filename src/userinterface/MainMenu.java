@@ -34,23 +34,22 @@ public class MainMenu extends Region {
         Button playButton = new Button("Play Game");
         playButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
-                sceneSwitcher.startLocalGame();
-            }
+            public void handle(ActionEvent actionEvent) {sceneSwitcher.startLocalGame();}
         });
         Button hostButton = new Button("Host Game");
         hostButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
-                sceneSwitcher.setHostMenuScene();
-            }
+            public void handle(ActionEvent actionEvent) {sceneSwitcher.setHostMenuScene();}
         });
         Button joinButton = new Button("Join Game");
         joinButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
-                sceneSwitcher.setJoinMenuScene();
-            }
+            public void handle(ActionEvent actionEvent) {sceneSwitcher.setJoinMenuScene();}
+        });
+        Button vsComputerButton = new Button("VS Computer");
+        vsComputerButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {sceneSwitcher.startVSComputerGame();}
         });
         Button exitButton = new Button("Exit");
         exitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -59,6 +58,6 @@ public class MainMenu extends Region {
                 Platform.exit();
             }
         });
-        menuItems.getChildren().addAll(playButton,hostButton,joinButton,exitButton);
+        menuItems.getChildren().addAll(playButton,hostButton,joinButton,vsComputerButton,exitButton);
     }
 }

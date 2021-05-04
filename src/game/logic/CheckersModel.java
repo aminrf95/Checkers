@@ -39,6 +39,13 @@ public class CheckersModel {
         initializeGame();
     }
 
+    public CheckersModel(int[][] board, int currentPlayer) {
+        this.board = board;
+        this.currentPlayer = currentPlayer;
+        this.possibleMoves = new HashMap<>();
+        setPossibleMoves();
+    }
+
     //Used to set up a game with only two pieces, one move away from game over.
     //Uncomment this method and debug() at the end of initializeGame() to use.
 //    private void debug() {
@@ -91,14 +98,16 @@ public class CheckersModel {
     //Moves are entered as strings, from "ij" to "xy"
     public boolean makeMove(int i, int j, int x, int y) {
         //If the game is over, throw an exception
-        if(winner != 0) {throw new IllegalStateException("Cannot make move, game has already ended.");}
+        if(winner != 0) {
+            System.out.println(this);
+            throw new IllegalStateException("Cannot make move, game has already ended.");}
         String from = "" + i + j;
         String to = "" + x + y;
         //If the move entered is invalid, return false.
         if(!possibleMoves.containsKey(from) || !possibleMoves.get(from).contains(to)) {return false;}
         //Otherwise, get the piece at i,j
         int piece = board[i][j];
-        //set remove piece from i,j
+        //remove piece from i,j
         board[i][j] = 0;
         //If piece is at opposite end of board, make piece a king
         if(piece == RED_PIECE && x == 7 || piece == BLACK_PIECE && x == 0) {piece *= 2;}
@@ -252,6 +261,24 @@ public class CheckersModel {
     public static int[] convertStringCoordinates(String coordinates) {
         return new int[] {Character.getNumericValue(coordinates.charAt(0)),
                 Character.getNumericValue(coordinates.charAt(1))};
+    }
+
+    /**
+     * Returns a copy of the board's current state.
+     */
+    public int[][] getBoardCopy() {
+        int[][] out = new int[BOARD_COLS][BOARD_ROWS];
+        for(int i = 0; i < BOARD_ROWS; i++) {
+            for(int j = 0; j < BOARD_COLS; j++) {
+                out[i][j] = board[i][j];
+            }
+        }
+        return out;
+    }
+
+    @Override
+    public CheckersModel clone() {
+        return new CheckersModel(getBoardCopy(),currentPlayer);
     }
 
     @Override

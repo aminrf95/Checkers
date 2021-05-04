@@ -2,6 +2,7 @@ package userinterface;
 
 import game.gametype.LocalGame;
 import game.gametype.OnlineGame;
+import game.gametype.VSComputerGame;
 import game.logic.GameController;
 import game.view.BoardComponent;
 import game.view.GameView;
@@ -84,6 +85,13 @@ public class SceneSwitcher {
             }
         });
         GameView gameView = new GameView(this, gameController.getBoardComponent(), onlineGame);
+        setGameScene(gameView);
+    }
+
+    public void startVSComputerGame() {
+        GameController gameController = new GameController();
+        VSComputerGame computerGame = new VSComputerGame(gameController);
+        GameView gameView = new GameView(this, gameController.getBoardComponent(),computerGame);
         setGameScene(gameView);
     }
 }
