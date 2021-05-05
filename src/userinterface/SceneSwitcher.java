@@ -88,9 +88,9 @@ public class SceneSwitcher {
         setGameScene(gameView);
     }
 
-    public void startVSComputerGame() {
+    public void startVSComputerGame(int difficultyLevel) {
         GameController gameController = new GameController();
-        VSComputerGame computerGame = new VSComputerGame(gameController);
+        VSComputerGame computerGame = new VSComputerGame(gameController,difficultyLevel);
         GameView gameView = new GameView(this, gameController.getBoardComponent(),computerGame);
         setGameScene(gameView);
     }

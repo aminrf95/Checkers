@@ -1,4 +1,4 @@
-package game.gametype.checkersai;
+package game.logic.checkersai;
 
 import game.logic.CheckersModel;
 

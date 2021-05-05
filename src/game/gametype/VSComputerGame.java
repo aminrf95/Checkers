@@ -1,7 +1,7 @@
 package game.gametype;
 
-import game.gametype.checkersai.CheckersAI;
-import game.gametype.checkersai.SimpleSumEvalFunction;
+import game.logic.checkersai.CheckersAI;
+import game.logic.checkersai.SimpleSumEvalFunction;
 import game.logic.CheckersModel;
 import game.logic.GameController;
 import game.view.BoardComponent;
@@ -38,10 +38,10 @@ public class VSComputerGame extends Game {
     CheckersAI computerAI;
     CheckersModel model;
 
-    public VSComputerGame(GameController controller) {
+    public VSComputerGame(GameController controller, int difficultyLevel) {
         this.controller = controller;
         this.model = controller.getCheckersModel();
-        computerAI = new CheckersAI(new SimpleSumEvalFunction(), 10, -1);
+        computerAI = new CheckersAI(new SimpleSumEvalFunction(), difficultyLevel, -1);
         BoardComponent boardComponent = controller.getBoardComponent();
         for(int i = 0; i < CheckersModel.BOARD_ROWS; i++) {
             for(int j = 0; j < CheckersModel.BOARD_COLS; j++) {
