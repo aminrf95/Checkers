@@ -68,8 +68,6 @@ public class VSComputerGame extends Game {
         String[] move = computerAI.chooseMove(model.clone());
         int[] from = CheckersModel.convertStringCoordinates(move[0]);
         int[] to = CheckersModel.convertStringCoordinates(move[1]);
-        System.out.println(Arrays.toString(from));
-        System.out.println(Arrays.toString(to));
         controller.selectSquare(from[0],from[1]);
         controller.selectSquare(to[0],to[1]);
     }
