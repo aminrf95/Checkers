@@ -5,10 +5,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -16,7 +14,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class HostMenu extends Region {
+public class HostMenu extends StackPane {
 
     public class ServerThread extends Thread {
 
@@ -46,13 +44,11 @@ public class HostMenu extends Region {
 
     public HostMenu(SceneSwitcher sceneSwitcher) {
         this.sceneSwitcher = sceneSwitcher;
-        BorderPane mainPane = new BorderPane();
-        this.getChildren().add(mainPane);
         VBox menuItems = new VBox();
         menuItems.setAlignment(Pos.CENTER);
         menuItems.setPadding(new Insets(40,40,40,40));
         menuItems.setSpacing(10);
-        mainPane.setCenter(menuItems);
+        this.getChildren().add(menuItems);
         String instructions = "Press the Search button to initiate connection.";
         hostMenuText = new Text(instructions);
         hostName = new Text("");

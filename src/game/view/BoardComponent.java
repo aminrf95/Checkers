@@ -1,6 +1,10 @@
 package game.view;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -8,7 +12,7 @@ import javafx.scene.shape.Rectangle;
  * This class represents the board for a checkers game. It is composed of an 8x8
  * grid of CheckersSquareComponents, and provides access to the square located at i,j.
  */
-public class BoardComponent extends Region {
+public class BoardComponent extends Pane {
 
     public static final int BOARD_ROWS = 8;
     public static final int BOARD_COLS = 8;

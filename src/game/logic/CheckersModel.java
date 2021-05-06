@@ -48,14 +48,14 @@ public class CheckersModel {
 
     //Used to set up a game with only two pieces, one move away from game over.
     //Uncomment this method and debug() at the end of initializeGame() to use.
-//    private void debug() {
-//        board = new int[8][8];
-//        board[0][0] = RED_PIECE;
-//        board[1][1] = BLACK_PIECE;
-//        currentPlayer = RED_PIECE;
-//        winner = 0;
-//        setPossibleMoves();
-//    }
+    private void debug() {
+        board = new int[8][8];
+        board[0][0] = RED_PIECE;
+        board[1][1] = BLACK_PIECE;
+        currentPlayer = RED_PIECE;
+        winner = 0;
+        setPossibleMoves();
+    }
 
     private void initializeGame() {
         board = new int[BOARD_ROWS][BOARD_COLS];
@@ -80,7 +80,7 @@ public class CheckersModel {
         //Red moves first
         currentPlayer = RED_PIECE;
         setPossibleMoves();
-        //debug();
+        //debug(); //Uncomment this line to set up an end-game board
     }
 
     public void resetGame() {

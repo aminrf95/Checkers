@@ -7,41 +7,39 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.Socket;
 
-public class JoinMenu extends Region {
+public class JoinMenu extends StackPane {
 
     private SceneSwitcher sceneSwitcher;
-    private BorderPane mainPane;
     private VBox menuItems;
 
     public JoinMenu(SceneSwitcher sceneSwitcher) {
+        this.setAlignment(Pos.CENTER);
         this.sceneSwitcher = sceneSwitcher;
-        mainPane = new BorderPane();
-        this.getChildren().add(mainPane);
+
         menuItems = new VBox();
         menuItems.setAlignment(Pos.CENTER);
         menuItems.setPadding(new Insets(40,40,40,40));
         menuItems.setSpacing(10);
-        mainPane.setCenter(menuItems);
+        this.getChildren().add(menuItems);
         String instructions = "Enter connection details :";
         Text joinMenuText = new Text(instructions);
 
         HBox hostNameDetails = new HBox();
+        hostNameDetails.setAlignment(Pos.CENTER);
         hostNameDetails.setSpacing(24);
         Label hostNameLabel = new Label("Enter Hostname : ");
         TextField hostNameField = new TextField();
         hostNameDetails.getChildren().addAll(hostNameLabel,hostNameField);
 
         HBox portNumberDetails = new HBox();
+        portNumberDetails.setAlignment(Pos.CENTER);
         portNumberDetails.setSpacing(10);
         Label portNumberLabel = new Label("Enter port number : ");
         TextField portNumberField = new TextField();
@@ -56,6 +54,7 @@ public class JoinMenu extends Region {
 
         menuItems.getChildren().addAll(joinMenuText,hostNameDetails,portNumberDetails,controls);
 
+        //Set button actions
         connectButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

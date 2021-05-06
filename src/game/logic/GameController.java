@@ -2,6 +2,8 @@ package game.logic;
 
 import game.view.BoardComponent;
 import game.view.CheckersSquareComponent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.util.Map;
 import java.util.Set;
@@ -32,6 +34,7 @@ public class GameController {
         selectedSquare = null;
         updateView();
         possibleMoves = checkersModel.getPossibleMoves();
+        unmarkAll();
         highlightAvailable(true);
     }
 
@@ -80,20 +83,9 @@ public class GameController {
         highlightAvailable(false);
         checkersModel.makeMove(from,to);
         updateView();
-        if(checkersModel.getWinner() != 0) {
-            endGame();
-        }
         //get the possible moves, and highlight movable pieces.
         possibleMoves = checkersModel.getPossibleMoves();
         highlightAvailable(true);
-    }
-
-    private void endGame() {
-        String winnerString;
-        if(checkersModel.getWinner() == CheckersModel.RED_PIECE) {winnerString = "Red";}
-        else if(checkersModel.getWinner() == CheckersModel.BLACK_PIECE) {winnerString = "Black";}
-        else {throw new IllegalStateException();}
-        System.out.println(winnerString+" wins!");
     }
 
     //sets the highlight on all movable pieces.
@@ -114,6 +106,15 @@ public class GameController {
             for(String s : possibleMoves.get(selectedSquare)) {
                 int[] coordinates = CheckersModel.convertStringCoordinates(s);
                 boardComponent.getSquare(coordinates[0],coordinates[1]).setMarker(mark);
+            }
+        }
+    }
+
+    //Called during resets to ensure squares marked in previous game are reverted.
+    private void unmarkAll() {
+        for(int i = 0; i < CheckersModel.BOARD_ROWS; i++) {
+            for(int j = 0; j < CheckersModel.BOARD_COLS; j++) {
+                boardComponent.getSquare(i,j).setMarker(false);
             }
         }
     }
